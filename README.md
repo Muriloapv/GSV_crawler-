@@ -14,8 +14,8 @@ Executar crawler: python .\1_regularize\main.py
 
 ## Como usar
 1. Clone o repositório:
-   git clone https://seu-repositorio.git
-   cd "C:\Users\muril\OneDrive\Área de Trabalho\Python\GSV_crawler-"
+   ```
+   git clone https://github.com/Muriloapv/GSV_crawler-.git
    ```
 2. Crie e ative um ambiente virtual:
    ```
