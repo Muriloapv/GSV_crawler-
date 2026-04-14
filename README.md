@@ -5,10 +5,11 @@ Executar crawler: python .\1_regularize\main.py
 2. [ CADIN Municipal - Consulta Inscritos ](https://www3.prefeitura.sp.gov.br/cadin/Pesq_Deb.aspx)
 ```
 Executar crawler: python .\
+```
 3. [ CADASTRO INFORMATIVO MUNICIPAL - CADIN ](https://cadin.prefeitura.sp.gov.br/FiscRecFed.aspx)
 ```
 Executar crawler: python .\
-```
+
 
 ## Como usar
 1. Clone o repositório:
