@@ -1,15 +1,13 @@
-#1 ) Regulariza 
-[Lista devedores](https://www.listadevedores.pgfn.gov.br/)
+1. [ Regularize - Lista de devedores ](https://www.listadevedores.pgfn.gov.br/)
 ```
 Executar crawler: python .\1_regularize\main.py
 ```
-#2 )
-[Prefeitura SP ](https://www3.prefeitura.sp.gov.br/cadin/Pesq_Deb.aspx)
+2. [ CADIN Municipal - Consulta Inscritos ](https://www3.prefeitura.sp.gov.br/cadin/Pesq_Deb.aspx)
 ```
+Executar crawler: python .\
+3. [ CADASTRO INFORMATIVO MUNICIPAL - CADIN ](https://cadin.prefeitura.sp.gov.br/FiscRecFed.aspx)
 ```
-#Teste 3
-[3 ) Prefeitura SP](https://cadin.prefeitura.sp.gov.br/FiscRecFed.aspx)
-```
+Executar crawler: python .\
 ```
 
 ## Como usar
@@ -20,14 +18,15 @@ Executar crawler: python .\1_regularize\main.py
 2. Crie e ative um ambiente virtual:
    ```
    python -m venv venv
+3. Ative o ambiente virtual:
    ```
    .\venv\Scripts\activate
    ```
-3. Instale as dependências:
+4. Instale as dependências:
    ```
    pip install -r requirements.txt
    ```
-4. Instale os navegadores do Playwright:
+5. Instale os navegadores do Playwright:
    ```
    python -m playwright install
    ```
