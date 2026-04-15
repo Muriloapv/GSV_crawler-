@@ -73,6 +73,7 @@ with sync_playwright() as pw:
 
     pagina.wait_for_timeout(10000)
     navegador.close()
+    
 
 
 
