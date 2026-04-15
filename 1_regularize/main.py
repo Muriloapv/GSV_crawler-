@@ -1,6 +1,7 @@
 from playwright.sync_api import sync_playwright
 import csv
 import json
+import os
 
 with sync_playwright() as pw:
    colunas   = ["CPF/CNPJ", "Nome", "Valor total da dívida (R$)"]
@@ -10,7 +11,7 @@ with sync_playwright() as pw:
    valorMax  = "10.000"
    navegador = pw.chromium.launch_persistent_context(
       user_data_dir=r'C:\Temp\pw_profile',
-      headless=False,
+      headless=False,#alterar para true caso não queira que abra a aba
       channel="chrome", 
       args=[ "--disable-blink-features=AutomationControlled",
              "--disable-infobars",
@@ -48,7 +49,7 @@ with sync_playwright() as pw:
    
    pagina.wait_for_selector("table tbody tr.ng-star-inserted", timeout=15000)
    pagina.wait_for_selector("p.total-mensagens strong", timeout=15000)
-   pagina.wait_for_timeout(2000)  # aguarda renderização completa
+   pagina.wait_for_timeout(2000) 
 
    total_linhas = pagina.locator("p.total-mensagens strong" ).inner_text()
    linhas       = pagina.locator("table tbody tr.ng-star-inserted").all()
@@ -65,7 +66,11 @@ with sync_playwright() as pw:
          print( f"Linha { index + 1 }: {textos}")
          resultados.append(textos)
 
-      with open("regularize.csv", "w", newline="", encoding="utf-8-sig" ) as arquivo:
+      BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+      csv_path = os.path.join(BASE_DIR, "regularize.csv")
+      json_path = os.path.join(BASE_DIR, "regularize.json")
+
+      with open( csv_path, "w", newline="", encoding="utf-8-sig" ) as arquivo:
          writer = csv.writer( arquivo       )
          writer.writerow    ([ paginaTitle ])
          writer.writerow    ([             ])
@@ -86,7 +91,7 @@ with sync_playwright() as pw:
             "valor"   : linha[3]
          })
       
-      with open( "regularize.json", "w", encoding="utf-8" ) as arquivo:
+      with open( json_path, "w", encoding="utf-8" ) as arquivo:
          json.dump( dados_json, arquivo, ensure_ascii=False, indent=4)
       
       print( f"CSV e Json Salvo com: {len(resultados)} registros")

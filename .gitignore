@@ -8,6 +8,10 @@ __pycache__/
 
 # Distribution / packaging
 .Python
+venv/
+.venv/
+env/
+ENV/
 build/
 develop-eggs/
 dist/
