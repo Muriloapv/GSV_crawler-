@@ -9,6 +9,7 @@ Executar crawler: python .\
 3. [ CADASTRO INFORMATIVO MUNICIPAL - CADIN ](https://cadin.prefeitura.sp.gov.br/FiscRecFed.aspx)
 ```
 Executar crawler: python .\
+```
 
 
 ## Como usar
