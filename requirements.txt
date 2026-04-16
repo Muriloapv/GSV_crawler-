@@ -1,2 +1,3 @@
 playwright
-easyocr
+pillow
+ddddocr
