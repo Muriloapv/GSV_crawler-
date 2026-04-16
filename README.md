@@ -38,7 +38,3 @@ Executar crawler:  python .\3_cadin_cadastro\main.py
    ```
    pip install -r requirements.txt
    ```
-5. Instale os navegadores do Playwright:
-   ```
-   python -m playwright install
-   ```
