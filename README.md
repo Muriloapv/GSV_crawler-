@@ -8,7 +8,7 @@ Executar crawler: python .\2_cadin_consulta_inscritos\main.py
 ```
 3. [ CADASTRO INFORMATIVO MUNICIPAL - CADIN ](https://cadin.prefeitura.sp.gov.br/FiscRecFed.aspx)
 ```
-Executar crawler: python .\
+Executar crawler:  python .\3_cadin_cadastro\main.py
 ```
 
 

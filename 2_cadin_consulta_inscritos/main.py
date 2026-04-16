@@ -3,13 +3,14 @@ from PIL import Image
 import re
 import os
 import ddddocr
+import json
 
-listCpfCnpj    = []
 cpfCnpj        = '11462916988'
-caminhoCaptcha = r"C:\Temp\captcha.jpg"#os.path.join(BASE_DIR, "captcha.png")
+url            = 'https://www3.prefeitura.sp.gov.br/cadin/Pesq_Deb.aspx' 
+caminhoCaptcha = r"C:\Temp\captcha.jpg"
    
 def getCaptcha( _captchaImg ) -> str:
-    _captchaImg.wait_for(state="visible")
+    _captchaImg.wait_for( state="visible" )
     _captchaImg.screenshot( path=caminhoCaptcha )
 
     imagem          = Image.open(caminhoCaptcha)
@@ -38,15 +39,15 @@ with sync_playwright() as pw:
         user_data_dir=r'C:\Temp\pw_profile',
         headless=False,#alterar para true caso não queira que abra a aba
         channel="chrome", 
-        args=[ 
-                "--disable-blink-features=AutomationControlled",
-                "--disable-infobars",
-                "--start-maximized",
-                "--no-sandbox", 
-            ]
+        ignore_default_args=["--enable-automation"], 
+        args=[
+            "--disable-blink-features=AutomationControlled",
+            "--start-maximized",
+            "--no-sandbox",
+        ]
     )   
     pagina = navegador.new_page()
-    pagina.goto('https://www3.prefeitura.sp.gov.br/cadin/Pesq_Deb.aspx')
+    pagina.goto( url )
     pagina.wait_for_timeout(3000)
     pagina.mouse.move(200, 300)
 
@@ -57,6 +58,7 @@ with sync_playwright() as pw:
     if btnCookies.count() > 0:
         btnCookies.click()#avaliar negar
 
+    print('1')
     textoCaptcha = getCaptcha(captchaImg)
     pagina.get_by_role("textbox", name="CNPJ ou CPF.").click()
     pagina.wait_for_timeout(500)
@@ -69,9 +71,25 @@ with sync_playwright() as pw:
 
     pagina.wait_for_timeout(800)
     pagina.mouse.move(300, 400)  
+    
     pagina.get_by_role("button", name="Pesquisar").click()
+    BASE_DIR       = os.path.dirname(os.path.abspath(__file__))
+    json_path      = os.path.join(BASE_DIR, "cadin_consulta.json" )
+    resultPesquisa = pagina.inner_text("span#lbl_NaoAchou").strip()
+    dados_json = {
+        "url"      : url,
+        "pagina"   : paginaTitle,
+        "cpf_cnpj" : cpfCnpj,
+        "result"   : resultPesquisa    
+    }
 
-    pagina.wait_for_timeout(10000)
+    with open( json_path, 'w', encoding='utf-8') as f:
+        json.dump( dados_json, f, ensure_ascii=False, indent=4)
+    
+    print(paginaTitle)
+    print(resultPesquisa)
+    print("JSON Salvo com sucesso.")
+    pagina.wait_for_timeout(5000)
     navegador.close()
     
 
