@@ -21,7 +21,6 @@ def getCaptcha( _captchaImg ) -> str:
 
    imagem          = imagem.resize((largura * 3, altura * 3), Image.LANCZOS)
    imagem          = imagem.convert("L")
-   imagem          = imagem.point(lambda x: 0 if x < 140 else 255)
    imagem.save(caminhoCaptcha)
     
    returnCaptcha   = ler_captcha(caminhoCaptcha)
